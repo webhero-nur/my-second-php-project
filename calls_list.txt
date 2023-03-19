@@ -1,0 +1,13 @@
+users:
+    - SignUp
+    - is username available
+    - login
+exp_type:
+    - Add exp type
+    - Edit title
+expenses:
+    - Add new expense
+    - update expense
+    - Delete expense
+    - select expense within date range
+    - select expense lifetime

@@ -17,6 +17,10 @@
             $obj->login();
             break;
         
+        case 'check_username':
+            $obj->check_username($_GET['puname']);
+            break;
+        
         default:
             echo "<script>alert('wrong operation')</script>";
             break;

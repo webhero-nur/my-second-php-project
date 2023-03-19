@@ -51,6 +51,21 @@
             
         }
 
+        public function check_username($potential_username='')
+        {
+            $qry = "SELECT id FROM users WHERE username='".$potential_username."'";
+
+            $res = $this->con->query($qry);
+
+            if($res->num_rows>0){
+                echo "username '".$potential_username."' is not available.";
+            }
+            else{
+                echo "username available";
+            }
+
+        }
+
         public function login()
         {
             echo $this->user_auth("login");
