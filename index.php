@@ -9,9 +9,13 @@
 </head>
 
 <body>
-    <?php
-    echo "<h1>Welcome to expense recorder</h1>";
-    ?>
+    <form action="api/controller/user_controller.php">
+        <p>Full Name: <input type="text" name="full_name" id="full-name"></p>
+        <p>Username: <input type="text" name="username" id="user-name"></p>
+        <p>Password: <input type="password" name="password" id="password"></p>
+        <p>Operation: <input type="text" name="op" id="operation" placeholder="insert"></p>
+        <input type="submit" value="Go">
+    </form>
 </body>
 
 </html>

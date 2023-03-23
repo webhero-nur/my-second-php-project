@@ -19,14 +19,16 @@
             // }
         }
 
-        function add_user(){
+        function add_user($full_name, $username, $password){
 
-            $qry = "INSERT INTO users(full_name, username, password) VALUES('".$_POST['full_name']."','".$_POST['username']."','".$_POST['password']."')";
-
+            // $qry = "INSERT INTO users(full_name, username, password) VALUES('".$_POST['full_name']."','".$_POST['username']."','".$_POST['password']."')";
+            $qry = "INSERT INTO users(full_name, username, password) VALUES('".$full_name."','".$username."','".$password."')"; // my code
+            
             $result = $this->con->query($qry);
 
             if($result){
-                echo "User added";
+                echo "<script>alert('User Inserted')</script>";
+                echo "<script>window.location = '../../index.php';</script>";
             }
             else{
                 echo "Contact Developer";
