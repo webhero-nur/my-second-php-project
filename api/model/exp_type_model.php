@@ -35,8 +35,7 @@ class exp_type_model extends auth{
         }
     }
 
-    public function list_exp_type($uid='')
-    {
+    public function list_exp_type($uid=''){
         // if($this->user_auth()){
         if(true){
 
@@ -57,11 +56,34 @@ class exp_type_model extends auth{
                 echo 'No data found';
             }
 
+        }
+        else{
+            echo 'Auth Failed in list_exp_type';
+        }
+    }
+
+    public function edit_exp_type_title($title, $exp_type_id=''){
+        
+        // if(this->user_auth()){
+        if(true){
+
+            // $qry = "UPDATE exp_type SET title='".$_POST['title']."' WHERE id=".$_POST['exp_type_id'].";";
+            $qry = "UPDATE exp_type SET title='".$title."' WHERE id=".$exp_type_id.";";
+
+            $res = $this->con->query($qry);
+
+            if(mysqli_affected_rows($this->con)==1){
+                echo "Updated Successfully";
+            }
+            else{
+                echo "Contact Developer in exp_type_model.php --> edit_exp_type_title";
+            }
 
         }
         else{
-            echo 'Auth Failed';
+            echo 'Auth Failed in edit_exp_type_title';
         }
+
     }
 
 }
