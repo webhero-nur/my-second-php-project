@@ -5,6 +5,7 @@ users:
 exp_type:
     - Add exp type
     - Edit title
+    - list all exp type
 expenses:
     - Add new expense
     - update expense

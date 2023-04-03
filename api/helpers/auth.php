@@ -7,9 +7,11 @@
             $user = 'root';
             $password = '';
             $db = 'expense_recorder';
+
             $headers = apache_request_headers();
             $tokenData = explode(" ", $headers['Authorization']);
             $creds = explode(":", base64_decode($tokenData[1]));
+            
             $con = new mysqli($host, $user, $password, $db);
 
             $qry = "SELECT id, full_name FROM users WHERE username='".$creds[0]."' AND password='".strrev($creds[1])."';";
