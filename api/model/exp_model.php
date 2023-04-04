@@ -41,7 +41,6 @@ class exp_model extends auth {
         // if(this->user_auth()){
         if(true){
     
-    
             $res = $this->con->query($qry);
     
             if($res){
@@ -69,34 +68,7 @@ class exp_model extends auth {
         
         $qry = "SELECT * FROM expenses WHERE uid=".$uid.";";
 
-        expenses_list($qry);
-
-        // // if(this->user_auth()){
-        // if(true){
-
-
-        //     $res = $this->con->query($qry);
-
-        //     if($res){
-
-        //         $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-        //         header("Content-type:application/json");
-
-        //         echo json_encode($data);
-
-        //     }
-        //     else{
-
-        //         echo "User id not valid";
-
-        //     }
-
-        // }
-        // else{
-        //     echo 'Auth Failed in exp_model.php --> list_all_expenses';
-        // }
-
+        $this->expenses_list($qry);
 
     }
 
@@ -104,33 +76,7 @@ class exp_model extends auth {
         
         $qry = "SELECT * FROM expenses WHERE curdate between '".$from."' and '".$to."' and uid=".$uid.";";
 
-        expenses_list($qry);
-
-        // // if(this->user_auth()){
-        // if(true){
-
-
-        //     $res = $this->con->query($qry);
-
-        //     if($res){
-
-        //         $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-        //         header("Content-type:application/json");
-
-        //         echo json_encode($data);
-
-        //     }
-        //     else{
-
-        //         echo "User id not valid";
-
-        //     }
-
-        // }
-        // else{
-        //     echo 'Auth Failed in exp_model.php --> list_all_expenses';
-        // }
+        $this->expenses_list($qry);
 
     }
 
@@ -173,6 +119,7 @@ class exp_model extends auth {
             else{
                 echo "Contact Developer in exp_model.php --> delete_exp";
             }
+
 
         }
         else{
