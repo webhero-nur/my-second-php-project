@@ -9,6 +9,6 @@ exp_type:
 expenses:
     - Add new expense
     - select expense lifetime
+    - select expense within date range
     - update expense
     - Delete expense
-    - select expense within date range
