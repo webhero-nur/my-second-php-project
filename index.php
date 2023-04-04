@@ -27,10 +27,23 @@
         <p>Operation: <input type="text" name="op" id="operation" placeholder="list_exp_type"></p>
         <input type="submit" value="Go">
     </form> -->
-    <form action="api/controller/exp_type_controller.php">
+    <!-- <form action="api/controller/exp_type_controller.php">
         <p>New Title: <input type="text" name="title" id="title"></p>
         <p>Exp Title ID: <input type="number" name="exp_type_id" id="exp_type_id"></p>
         <p>Operation: <input type="text" name="op" id="operation" placeholder="edit_exp_type_title"></p>
+        <input type="submit" value="Go">
+    </form> -->
+    <!-- <form action="api/controller/exp_controller.php">
+        <p>Payee: <input type="text" name="payee" id="payee"></p>
+        <p>Amount: <input type="number" name="amount" id="amount"></p>
+        <p>Exp Type ID: <input type="number" name="exp_type_id" id="exp_type_id"></p>
+        <p>uID: <input type="number" name="uid" id="uid"></p>
+        <p>Operation: <input type="text" name="op" id="operation" placeholder="add_expense"></p>
+        <input type="submit" value="Go">
+    </form> -->
+    <form action="api/controller/exp_controller.php">
+        <p>uID: <input type="number" name="uid" id="uid"></p>
+        <p>Operation: <input type="text" name="op" id="operation" placeholder="list_all_expenses"></p>
         <input type="submit" value="Go">
     </form>
 </body>

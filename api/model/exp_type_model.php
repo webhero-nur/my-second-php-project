@@ -81,7 +81,7 @@ class exp_type_model extends auth{
 
         }
         else{
-            echo 'Auth Failed in edit_exp_type_title';
+            echo 'Auth Failed in exp_type_model.php --> edit_exp_type_title';
         }
 
     }
