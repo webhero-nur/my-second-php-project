@@ -6,8 +6,7 @@
     
     switch ($_GET['op']) {
         case 'insert':
-            // $obj->add_user();
-            $obj->add_user($_GET['full_name'], $_GET['username'], $_GET['password']); // my code
+            $obj->add_user();
             break;
         
         case 'list':

@@ -22,7 +22,7 @@
 
     <div class="container pt-3">
         <h1>Signup Form</h1>
-        <form action="">
+        <form id="signup-form">
             <div class="form-group py-1">
                 <input type="text" name="" id="full-name" class="form-control" placeholder="Full Name">
             </div>
@@ -31,20 +31,50 @@
                     onkeyup="checkUsername(this.value)">
             </div>
             <div class="form-group py-1">
-                <input type="text" name="" id="password" class="form-control" placeholder="Password">
+                <input type="password" name="" id="password" class="form-control" placeholder="Password">
             </div>
             <div id="username-notice" class="form-group d-none">
                 <small class="text-danger">*username already taken</small>
             </div>
             <div class="form-group py-1">
-                <button id="submit-btn" class="btn btn-primary w-100" disabled>SUBMIT</button>
+                <button id="submit-btn" type="submit" class="btn btn-primary w-100" disabled>SUBMIT</button>
             </div>
         </form>
     </div>
 
     <script type="text/javascript" src="./js/jquery-3.6.4.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script type="text/javascript">
+
+        $("#signup-form").on("submit", function (e) {
+
+            e.preventDefault();
+
+            let dataToPost = {
+                full_name: $("#full-name").val(),
+                username: $("#username").val(),
+                password: $("#password").val()
+            };
+
+            $.ajax({
+                url: "http://localhost/expence_recorder/api/controller/user_controller.php?op=insert",
+                type: "POST",
+                data: dataToPost,
+                success: function (res) {
+                    if (res === 'SignUp Successful') {
+                        swal("Signed Up", "You may LogIn now", "success")
+                            .then(function (p) {
+                                location.href = "./login.html";
+                            });
+                    }
+                    console.log(res);
+                }
+            })
+
+            console.log(dataToPost);
+
+        });
 
         function checkUsername(potentialUsername) {
 
