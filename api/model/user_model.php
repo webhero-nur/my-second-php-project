@@ -10,13 +10,6 @@
             $password = '';
             $db = 'expense_recorder';
             $this->con = new mysqli($host, $user, $password, $db);
-            // db connection check
-            // if($con->connect_errno==0){
-            //     echo "Connection Successful<br>";
-            // }
-            // else{
-            //     echo "<h2>".$con->connect_error."</h2>";
-            // }
         }
 
         public function check_username($potential_username=''){
@@ -25,7 +18,7 @@
             $res = $this->con->query($qry);
 
             if($res->num_rows>0){
-                echo "username '".$potential_username."' is not available.";
+                echo "username not available.";
             }
             else{
                 echo "username available";
