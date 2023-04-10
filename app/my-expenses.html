@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Expenses</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/0a356bbaa5.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -46,6 +47,29 @@
 
     <div class="container pt-3">
         <h1>My Expenses</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Payee</th>
+                    <th scope="col">Amount </th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>KFC</td>
+                    <td>300</td>
+                    <td>
+                        <button class="btn btn-info" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button class="btn btn-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
     <script type="text/javascript" src="./js/jquery-3.6.4.js"></script>
@@ -59,8 +83,20 @@
 
         const logout = () => {
             localStorage.removeItem("userData");
+            localStorage.removeItem("access-token");
             location.href = "login.html";
         }
+
+        $.ajax({
+            url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=list_all_expenses&uid=" + JSON.parse(localStorage.getItem("userData"))[0].id,
+            type: "GET",
+            headers: {
+                "auth": "credentials " + localStorage.getItem("access-token")
+            },
+            success: function (res) {
+                console.log(res);
+            }
+        });
     </script>
     <!-- <script type="text/javascript" src="./js/jquery-3.6.4.slim.js"></script> -->
     <script type="text/javascript" src="./js/bootstrap.bundle.min.js"></script>

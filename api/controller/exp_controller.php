@@ -14,12 +14,12 @@ $obj = new exp_model();
             $obj->list_all_expenses($_GET['uid']);
             break;
 
-        case 'select_daterange_data':
-            $obj->select_daterange_data($_GET['date_from'], $_GET['date_to'], $_GET['uid']);
+        case 'select_date_range_data':
+            $obj->select_date_range_data($_GET['date_from'], $_GET['date_to'], $_GET['uid']);
             break;
 
         case 'update_exp':
-            $obj->update_exp($_GET['payee'], $_GET['amount'], $_GET['exp_id']);
+            $obj->update_exp();
             break;
 
         case 'delete_exp':

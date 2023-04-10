@@ -14,11 +14,9 @@ class exp_model extends auth {
 
     public function add_expense($payee, $amount, $exp_type_id, $uid){
 
-        // if(this->user_auth()){
-        if(true){
+        if(this->user_auth()){
 
-            // $qry = "INSERT INTO expenses(curdate, payee, amount, exp_type_id, uid) VALUES(CURDATE(), '".$_POST['payee']."', ".$_POST['amount'].", ".$_POST['exp_type_id'].", ".$_POST['uid'].");";
-            $qry = "INSERT INTO expenses(curdate, payee, amount, exp_type_id, uid) VALUES(CURDATE(), '".$payee."', ".$amount.", ".$exp_type_id.", ".$uid.");";
+            $qry = "INSERT INTO expenses(curdate, payee, amount, exp_type_id, uid) VALUES(CURDATE(), '".$_POST['payee']."', ".$_POST['amount'].", ".$_POST['exp_type_id'].", ".$_POST['uid'].");";
 
             $res = $this->con->query($qry);
 
@@ -38,8 +36,7 @@ class exp_model extends auth {
 
     public function expenses_list($qry){
 
-        // if(this->user_auth()){
-        if(true){
+        if($this->user_auth()){
     
             $res = $this->con->query($qry);
     
