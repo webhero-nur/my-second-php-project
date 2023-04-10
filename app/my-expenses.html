@@ -52,21 +52,14 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Payee</th>
                     <th scope="col">Amount </th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>KFC</td>
-                    <td>300</td>
-                    <td>
-                        <button class="btn btn-info" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button class="btn btn-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
-                    </td>
-                </tr>
+            <tbody id="expenses-list-table">
+
             </tbody>
         </table>
 
@@ -94,7 +87,28 @@
                 "auth": "credentials " + localStorage.getItem("access-token")
             },
             success: function (res) {
-                console.log(res);
+
+                let trs = "";
+
+                $.each(res, function (key, val) {
+
+                    tr = `<tr>
+                        <td>${key + 1}</td>
+                        <td>${val.curdate}</td>
+                        <td>${val.payee}</td>
+                        <td>${val.amount}</td>
+                        <td>
+                            <button class="btn btn-info" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                            <button class="btn btn-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>`;
+
+                    trs += tr;
+
+                })
+
+                $("#expenses-list-table").html(trs);
+
             }
         });
     </script>
