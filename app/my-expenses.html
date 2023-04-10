@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Expenses</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./media/img/expense.png" alt="Logo" width="30" height="24"
+                    class="d-inline-block align-text-top">
+                Expense Recorder
+            </a>
+        </div>
+    </nav>
+
+    <div class="container pt-3">
+        <h1>My Expenses</h1>
+    </div>
+
+    <script type="text/javascript" src="./js/jquery-3.6.4.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        if (!localStorage.getItem("userData")) {
+            location.href = "login.html";
+        }
+    </script>
+    <!-- <script type="text/javascript" src="./js/jquery-3.6.4.slim.js"></script> -->
+    <script type="text/javascript" src="./js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

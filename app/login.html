@@ -61,7 +61,14 @@
                     "auth": "credentials " + compositeString
                 },
                 success: function (res) {
-                    console.log(res);
+                    if (res === "") {
+                        alert("Invalid Credentials");
+                    }
+                    else {
+                        localStorage.setItem("userData", JSON.stringify(res));
+                        console.log(res);
+                        location.href = "my-expenses.html";
+                    }
                 }
             })
 
