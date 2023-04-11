@@ -1,5 +1,5 @@
 if (!localStorage.getItem("userData")) {
-    location.href = "login.html";
+    location.href = "http://localhost/expence_recorder/app/login.html";
 }
 
 function addExpense(e) {

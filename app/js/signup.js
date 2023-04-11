@@ -1,3 +1,7 @@
+if (localStorage.getItem("userData") !== null) {
+    location.href = "http://localhost/expence_recorder/app/my-expenses.html";
+}
+
 $("#signup-form").on("submit", function (e) {
 
     e.preventDefault();
