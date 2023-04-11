@@ -12,11 +12,11 @@ class exp_model extends auth {
         $this->con = new mysqli($host, $user, $password, $db);
     }
 
-    public function add_expense($payee, $amount, $exp_type_id, $uid){
+    public function add_expense(){
 
-        if(this->user_auth()){
+        if($this->user_auth()){
 
-            $qry = "INSERT INTO expenses(curdate, payee, amount, exp_type_id, uid) VALUES(CURDATE(), '".$_POST['payee']."', ".$_POST['amount'].", ".$_POST['exp_type_id'].", ".$_POST['uid'].");";
+            $qry = "INSERT INTO expenses(curdate, payee, amount, exp_type_id, uid) VALUES(CURDATE(), '".$_POST['payee']."', ".$_POST['amount'].", ".$_POST['exp_type_id'].", ".$_GET['uid'].");";
 
             $res = $this->con->query($qry);
 
@@ -79,11 +79,9 @@ class exp_model extends auth {
 
     public function update_exp($payee, $amount, $exp_id){
         
-        // if(this->user_auth()){
-        if(true){
+        if($this->user_auth()){
 
-            // $qry = "UPDATE expenses SET payee='".$_POST['payee']."', amount='".$_POST['amount']."' WHERE id=".$_POST['exp_id'].";";
-            $qry = "UPDATE expenses SET payee='".$payee."', amount='".$amount."' WHERE id=".$exp_id.";";
+            $qry = "UPDATE expenses SET payee='".$_POST['payee']."', amount='".$_POST['amount']."' WHERE id=".$_POST['exp_id'].";";
 
             $res = $this->con->query($qry);
 
@@ -103,8 +101,7 @@ class exp_model extends auth {
 
     public function delete_exp($exp_id=''){
         
-        // if(this->user_auth()){
-        if(true){
+        if($this->user_auth()){
 
             $qry = "DELETE FROM expenses WHERE id=".$exp_id.";";
 

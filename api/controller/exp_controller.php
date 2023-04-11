@@ -7,7 +7,7 @@ $obj = new exp_model();
     switch ($_GET['op']) {
 
         case 'add_expense':
-            $obj->add_expense($_GET['payee'], $_GET['amount'], $_GET['exp_type_id'], $_GET['uid']);
+            $obj->add_expense();
             break;
         
         case 'list_all_expenses':

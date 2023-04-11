@@ -8,6 +8,11 @@
     <title>My Expenses</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/0a356bbaa5.js" crossorigin="anonymous"></script>
+    <style>
+        .modal-backdrop {
+            z-index: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -65,6 +70,46 @@
 
     </div>
 
+    <div class="d-flex justify-content-end fixed-bottom p-4 footer">
+        <button class="btn btn-lg btn-primary rounded-circle" data-bs-toggle="modal"
+            data-bs-target="#addExpenseModal"><i class="fa-solid fa-plus"></i></button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addExpenseModal" tabindex="-1" role="dialog" aria-labelledby="addExpenseModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addExpenseModalLabel">Add New Expense</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <form id="add-exp-form" action="" class="" onsubmit="addExpense(event)">
+                                <div class="form-group py-2">
+                                    <select id="exp-types" name="exp_type_id" class="w-100 p-2 rounded">
+
+                                    </select>
+                                </div>
+                                <div class="form-group py-2">
+                                    <input type="text" name="payee" class="form-control" placeholder="Payee">
+                                </div>
+                                <div class="form-group py-2">
+                                    <input type="text" name="amount" class="form-control" placeholder="Amount">
+                                </div>
+                                <div class="form-group py-2">
+                                    <button class="btn btn-primary w-100">Add Expense</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="./js/jquery-3.6.4.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -73,6 +118,49 @@
         if (!localStorage.getItem("userData")) {
             location.href = "login.html";
         }
+
+        function addExpense(e) {
+            e.preventDefault();
+            console.log($("#add-exp-form").serializeArray());
+            $.ajax({
+                url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=add_expense&uid=" + JSON.parse(localStorage.getItem("userData"))[0].id,
+                type: "POST",
+                data: $("#add-exp-form").serializeArray(),
+                headers: {
+                    "auth": "credentials " + localStorage.getItem("access-token")
+                },
+                success: function (res) {
+                    if (res === "Expense added") {
+                        alert("Expense Added");
+                        location.reload();
+                    }
+                    else {
+                        alert("Something Went Wrong!!!");
+                    }
+                }
+            })
+        }
+
+        $.ajax({
+            url: "http://localhost/expence_recorder/api/controller/exp_type_controller.php?op=list_exp_type&uid=" + JSON.parse(localStorage.getItem("userData"))[0].id,
+            type: "GET",
+            headers: {
+                "auth": "credentials " + localStorage.getItem("access-token")
+            },
+            success: function (res) {
+                let options = "";
+
+                $.each(res, function (key, val) {
+
+                    option = `<option value="${val.id}">${val.title}</option>`;
+
+                    options += option;
+
+                });
+
+                $("#exp-types").html(options);
+            }
+        });
 
         const logout = () => {
             localStorage.removeItem("userData");
@@ -105,7 +193,7 @@
 
                     trs += tr;
 
-                })
+                });
 
                 $("#expenses-list-table").html(trs);
 
