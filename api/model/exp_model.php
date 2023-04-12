@@ -107,8 +107,8 @@ class exp_model extends auth {
 
             $res = $this->con->query($qry);
 
-            if(mysqli_affected_rows($this->con)==1){
-                echo "deleted Successfully";
+            if(mysqli_affected_rows($this->con)===1){
+                echo "Deleted Successfully";
             }
             else{
                 echo "Contact Developer in exp_model.php --> delete_exp";
