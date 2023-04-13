@@ -137,7 +137,7 @@ class exp_model extends auth {
 
                 for($row=0; $row<sizeof($rows);$row++){
 
-                    $qry2 = "SELECT SUM(amount) AS ".$rows[$row]['title']." FROM chart_data WHERE title='".$rows[$row]['title']."';";
+                    $qry2 = "SELECT SUM(amount) AS ".$rows[$row]['title']." FROM chart_data WHERE title='".$rows[$row]['title']."' AND uid=".$uid.";";
                     
                     $res2 = $this->con->query($qry2);
 

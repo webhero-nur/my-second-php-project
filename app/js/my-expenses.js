@@ -1,3 +1,42 @@
+const userDataInLocalStorage = JSON.parse(localStorage.getItem("userData"));
+
+const userFullName = `
+    <div class="fs-3 fw-bolder text-info" style="font-family: 'Tilt Prism', cursive;">${userDataInLocalStorage[0].full_name}</div>
+`;
+
+$("#user-full-name").html(userFullName);
+
+function windowOnLoad() {
+
+    $.ajax({
+        url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=piechart_data&uid=" + userDataInLocalStorage[0].id,
+        type: "GET",
+        headers: {
+            "auth": "credentials " + localStorage.getItem("access-token")
+        },
+        success: function (res) {
+
+            let chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "Expenses"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\"\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: JSON.parse(res)
+                }]
+            });
+            chart.render();
+
+        }
+    });
+
+
+}
+
 if (!localStorage.getItem("userData")) {
     location.href = "http://localhost/expence_recorder/app/login.html";
 }
@@ -6,24 +45,32 @@ function addExpense(e) {
     e.preventDefault();
     console.log($("#add-exp-form").serializeArray());
     $.ajax({
-        url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=add_expense&uid=" + JSON.parse(localStorage.getItem("userData"))[0].id,
+
+        url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=add_expense&uid=" + userDataInLocalStorage[0].id,
         type: "POST",
         data: $("#add-exp-form").serializeArray(),
         headers: {
             "auth": "credentials " + localStorage.getItem("access-token")
         },
         success: function (res) {
+
             if (res === "Expense added") {
-                swal("Expense Added", "Your Expense Been Added Successfully", "success")
+                Swal.fire(
+                    'Added',
+                    'Expense Added Successfully',
+                    'success'
+                )
                     .then(function (p) {
-                        loadAllExpense();
+                        location.reload();
                     });
             }
             else {
                 alert("Something Went Wrong!!!");
             }
+
         }
     })
+
 }
 
 function deleteExpense(expID) {
@@ -54,7 +101,8 @@ function deleteExpense(expID) {
                             clearInterval(timerInterval);
                         }
                     })
-                    loadAllExpense()
+                    windowOnLoad();
+                    loadAllExpense();
                 }
             });
         }
@@ -71,39 +119,42 @@ function deleteExpense(expID) {
         }
     })
 
+}
 
+function loadAllExpenseType() {
+
+    $.ajax({
+        url: "http://localhost/expence_recorder/api/controller/exp_type_controller.php?op=list_exp_type&uid=" + userDataInLocalStorage[0].id,
+        type: "GET",
+        headers: {
+            "auth": "credentials " + localStorage.getItem("access-token")
+        },
+        success: function (res) {
+            let options = "";
+
+            $.each(res, function (key, val) {
+
+                option = `<option value="${val.id}">${val.title}</option>`;
+
+                options += option;
+
+            });
+
+            $("#exp-types").html(options);
+        }
+    });
 
 }
 
-$.ajax({
-    url: "http://localhost/expence_recorder/api/controller/exp_type_controller.php?op=list_exp_type&uid=" + JSON.parse(localStorage.getItem("userData"))[0].id,
-    type: "GET",
-    headers: {
-        "auth": "credentials " + localStorage.getItem("access-token")
-    },
-    success: function (res) {
-        let options = "";
-
-        $.each(res, function (key, val) {
-
-            option = `<option value="${val.id}">${val.title}</option>`;
-
-            options += option;
-
-        });
-
-        $("#exp-types").html(options);
-    }
-});
-
-const logout = () => {
+function logout() {
     localStorage.removeItem("userData");
     localStorage.removeItem("access-token");
     location.href = "login.html";
 }
+
 function loadAllExpense() {
     $.ajax({
-        url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=list_all_expenses&uid=" + JSON.parse(localStorage.getItem("userData"))[0].id,
+        url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=list_all_expenses&uid=" + userDataInLocalStorage[0].id,
         type: "GET",
         headers: {
             "auth": "credentials " + localStorage.getItem("access-token")
@@ -135,4 +186,6 @@ function loadAllExpense() {
     });
 }
 
+windowOnLoad();
+loadAllExpenseType();
 loadAllExpense();
