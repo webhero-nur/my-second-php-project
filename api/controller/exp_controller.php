@@ -25,6 +25,10 @@ $obj = new exp_model();
         case 'delete_exp':
             $obj->delete_exp($_GET['exp_id']);
             break;
+        
+        case 'piechart_data':
+            $obj->piechart_data($_GET['uid']);
+            break;
 
         default:
             echo "Wrong Operation inside exp_controller.php";

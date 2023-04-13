@@ -12,3 +12,7 @@ expenses:
     - select expense within date range
     - update expense
     - Delete expense
+
+
+view qry:
+    - CREATE VIEW chart_data AS SELECT exp_type.title, expenses.curdate AS exp_date, expenses.amount, expenses.exp_type_id, expenses.uid FROM expenses INNER JOIN exp_type WHERE expenses.exp_type_id = exp_type.id;

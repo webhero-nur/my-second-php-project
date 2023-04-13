@@ -122,6 +122,58 @@ class exp_model extends auth {
 
     }
 
+    public function piechart_data($uid=''){
+
+        if($this->user_auth()){
+
+            $qry = "SELECT * FROM exp_type WHERE uid=".$uid.";";
+            $res = $this->con->query($qry);
+
+            if($res){
+    
+                $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    
+                $chartResponse = array();
+
+                for($row=0; $row<sizeof($rows);$row++){
+
+                    $qry2 = "SELECT SUM(amount) AS ".$rows[$row]['title']." FROM chart_data WHERE title='".$rows[$row]['title']."';";
+                    
+                    $res2 = $this->con->query($qry2);
+
+                    if($res2){
+
+                        $rows2 = mysqli_fetch_all($res2, MYSQLI_ASSOC);
+    
+                        // echo json_encode($rows2);
+
+                        if($rows2[0][ $rows[$row]['title'] ] === null){
+                            $rows2[0][ $rows[$row]['title'] ] = 0;
+                        }
+
+                        array_push($chartResponse, array("label"=>$rows[$row]['title'], "y"=>$rows2[0][ $rows[$row]['title'] ]));
+
+                    }
+
+                    else{
+                        echo "Error";
+                    }
+
+                }
+
+                echo json_encode($chartResponse);
+    
+            }
+            else{
+                
+                echo "User id not valid";
+    
+            }
+
+        }
+        
+    }
+
 }
 
 ?>

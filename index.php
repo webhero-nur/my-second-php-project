@@ -10,6 +10,11 @@
 
 <body>
     <!-- <form action="api/controller/exp_controller.php">
+        <p>uid: <input type="number" name="uid" id="uid" required></p>
+        <p>Operation: <input type="text" name="op" id="operation" placeholder="piechart_data" required></p>
+        <input type="submit" value="Go">
+    </form> -->
+    <!-- <form action="api/controller/exp_controller.php">
         <p>exp_id: <input type="number" name="exp_id" id="exp_id" required></p>
         <p>Operation: <input type="text" name="op" id="operation" placeholder="delete_exp" required></p>
         <input type="submit" value="Go">
