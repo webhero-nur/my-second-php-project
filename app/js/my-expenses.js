@@ -1,12 +1,17 @@
 const userDataInLocalStorage = JSON.parse(localStorage.getItem("userData"));
 
-const userFullName = `
-    <div class="fs-3 fw-bolder text-info" style="font-family: 'Tilt Prism', cursive;">${userDataInLocalStorage[0].full_name}</div>
-`;
-
-$("#user-full-name").html(userFullName);
 
 function windowOnLoad() {
+
+    if (!localStorage.getItem("userData")) {
+        location.href = "http://localhost/expence_recorder/app/login.html";
+    }
+
+    const userFullName = `
+        <div class="fs-3 fw-bolder text-info" style="font-family: 'Tilt Prism', cursive;">${userDataInLocalStorage[0].full_name}</div>
+    `;
+
+    $("#user-full-name").html(userFullName);
 
     $.ajax({
         url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=piechart_data&uid=" + userDataInLocalStorage[0].id,
@@ -34,11 +39,41 @@ function windowOnLoad() {
         }
     });
 
-
 }
 
-if (!localStorage.getItem("userData")) {
-    location.href = "http://localhost/expence_recorder/app/login.html";
+
+function updateExpense(e) {
+    e.preventDefault();
+    console.log($("#update-exp-form").serializeArray());
+    $.ajax({
+
+        url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=update_exp",
+        type: "POST",
+        data: $("#update-exp-form").serializeArray(),
+        headers: {
+            "auth": "credentials " + localStorage.getItem("access-token")
+        },
+        success: function (res) {
+
+            console.log(res);
+
+            if (res === "Updated Successfully") {
+                Swal.fire(
+                    'Updated',
+                    'Expense Updated Successfully',
+                    'success'
+                )
+                    .then(function (p) {
+                        location.reload();
+                    });
+            }
+            else {
+                alert("Something Went Wrong!!!");
+            }
+
+        }
+    })
+
 }
 
 function addExpense(e) {
@@ -53,6 +88,8 @@ function addExpense(e) {
             "auth": "credentials " + localStorage.getItem("access-token")
         },
         success: function (res) {
+
+            console.log(res);
 
             if (res === "Expense added") {
                 Swal.fire(
@@ -133,6 +170,7 @@ function loadAllExpenseType() {
             let options = "";
 
             $.each(res, function (key, val) {
+                let option = "";
 
                 option = `<option value="${val.id}">${val.title}</option>`;
 
@@ -171,7 +209,8 @@ function loadAllExpense() {
                 <td>${val.payee}</td>
                 <td>${val.amount}</td>
                 <td>
-                    <button class="btn btn-info" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                    <button class="btn btn-info" title="Edit" data-bs-toggle="modal"
+                    data-bs-target="#updateExpenseModal" onclick='bindDataToUpdate(${JSON.stringify(val)})'><i class="fa-regular fa-pen-to-square"></i></button>
                     <button class="btn btn-danger" title="Delete" onclick="deleteExpense(${val.id})"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>`;
@@ -184,6 +223,36 @@ function loadAllExpense() {
 
         }
     });
+}
+
+function bindDataToUpdate(dataToUpdate) {
+
+    const { id, payee, amount, exp_type_id } = dataToUpdate;
+
+    console.log(dataToUpdate);
+
+    $.ajax({
+        url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=exp_type&exp_type_id=" + exp_type_id,
+        type: "GET",
+        headers: {
+            "auth": "credentials " + localStorage.getItem("access-token")
+        },
+        success: function (res) {
+
+            const title = res[0].title;
+
+            const option = `<option>${title}</option>`;
+
+            $("#exp-type-to-update").html(option);
+
+        }
+    });
+
+    $("#exp_id-to-update").val(id);
+    $("#exp_id-to-update").attr('value', id);
+    $("#payee-to-update").val(payee);
+    $("#amount-to-update").val(amount);
+
 }
 
 windowOnLoad();

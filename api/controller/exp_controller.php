@@ -30,6 +30,10 @@ $obj = new exp_model();
             $obj->piechart_data($_GET['uid']);
             break;
 
+        case 'exp_type':
+            $obj->exp_type($_GET['exp_type_id']);
+            break;
+
         default:
             echo "Wrong Operation inside exp_controller.php";
             break;

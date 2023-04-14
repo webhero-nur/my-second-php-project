@@ -59,6 +59,7 @@
         </div>
     </nav>
 
+    <!-- expense list container -->
     <section class="container pt-3">
         <h1 class="text-center p-2 bg-primary text-light rounded-pill fw-bold">My Expenses</h1>
 
@@ -77,14 +78,64 @@
             </tbody>
         </table>
 
+
+        <!-- update expense modal -->
+        <div class="d-flex justify-content-end p-4">
+
+            <!-- Modal -->
+            <div class="modal fade" id="updateExpenseModal" tabindex="-1" role="dialog"
+                aria-labelledby="updateExpenseModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateExpenseModalLabel">Update Expense</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <form id="update-exp-form" action="" class="" onsubmit="updateExpense(event)">
+                                    <div class="form-group py-2">
+                                        <select id="exp-type-to-update" name="exp_type_id" class="w-100 p-2 rounded"
+                                            disabled>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group py-2">
+                                        <input type="hidden" id="exp_id-to-update" name="exp_id" class="form-control">
+                                    </div>
+                                    <div class="form-group py-2">
+                                        <input type="text" id="payee-to-update" name="payee" class="form-control"
+                                            placeholder="Payee">
+                                    </div>
+                                    <div class="form-group py-2">
+                                        <input type="text" id="amount-to-update" name="amount" class="form-control"
+                                            placeholder="Amount">
+                                    </div>
+                                    <div class="form-group py-2">
+                                        <button class="btn btn-primary w-100" data-bs-dismiss="modal"
+                                            aria-label="Close">Update
+                                            Expense</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
+    <!-- pie chart container -->
     <section class="container">
         <div id="chartContainer" style="height: 300px; width: 100%;">
 
         </div>
     </section>
 
+    <!-- add expenses modal -->
     <section class="d-flex justify-content-end fixed-bottom p-4 footer">
         <button class="btn btn-lg btn-primary rounded-circle" data-bs-toggle="modal"
             data-bs-target="#addExpenseModal"><i class="fa-solid fa-plus"></i></button>

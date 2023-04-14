@@ -77,7 +77,7 @@ class exp_model extends auth {
 
     }
 
-    public function update_exp($payee, $amount, $exp_id){
+    public function update_exp(){
         
         if($this->user_auth()){
 
@@ -97,6 +97,35 @@ class exp_model extends auth {
             echo 'Auth Failed in exp_model.php --> update_exp';
         }
         
+    }
+
+    public function exp_type($exp_type_id){
+
+        
+        // if($this->user_auth()){
+        
+            $qry = "SELECT title FROM exp_type WHERE id=".$exp_type_id.";";
+
+            $res = $this->con->query($qry);
+    
+            if($res){
+    
+                $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
+
+                header("Content-type: application/json");
+    
+                echo json_encode($data);
+    
+            }
+            else{
+                
+                echo "Expense type id not valid";
+    
+            }
+        // }
+        // else{
+        //     echo 'Auth Failed in exp_model.php --> list_all_expenses';
+        // }
     }
 
     public function delete_exp($exp_id=''){
