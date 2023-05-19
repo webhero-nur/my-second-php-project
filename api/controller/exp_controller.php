@@ -6,6 +6,10 @@ $obj = new exp_model();
     
     switch ($_GET['op']) {
 
+        case 'add_expense_type':
+            $obj->add_expense_type();
+            break;
+
         case 'add_expense':
             $obj->add_expense();
             break;
