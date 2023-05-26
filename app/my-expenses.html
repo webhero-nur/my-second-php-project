@@ -12,6 +12,7 @@
     <!-- fontawesome icons script -->
     <script src="https://kit.fontawesome.com/0a356bbaa5.js" crossorigin="anonymous"></script>
     <!-- custom css -->
+    <link rel="stylesheet" href="./css/style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
 
@@ -22,7 +23,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container-fluid">
             <div>
                 <a class="navbar-brand" href="#">
@@ -57,7 +58,7 @@
     </nav>
 
     <!-- expense list container -->
-    <section class="container pt-3">
+    <section class="container pt-3 mt-5">
         <h1 class="text-center p-2 bg-primary text-light rounded-pill fw-bold">My Expenses</h1>
 
         <table class="table">
@@ -127,7 +128,7 @@
 
     <!-- pie chart container -->
     <section class="container">
-        <div id="chartContainer" style="height: 300px; width: 100%;">
+        <div id="chartContainer" class="w-md-50 w-100 mx-auto" style="height: 300px;">
 
         </div>
     </section>
