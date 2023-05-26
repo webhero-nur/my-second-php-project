@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2023 at 09:48 PM
+-- Generation Time: May 26, 2023 at 11:43 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -61,19 +61,18 @@ INSERT INTO `expenses` (`id`, `curdate`, `payee`, `amount`, `exp_type_id`, `uid`
 (9, '2023-04-11', 'Pizza Hut (Mirpur)', 400, 5, 1),
 (10, '2023-04-11', 'Local Fucka Stall', 60, 5, 1),
 (12, '2023-04-11', 'Mama Chatpoti', 50, 1, 2),
-(16, '2023-04-11', 'Burger King', 1099, 5, 1),
+(16, '2023-04-11', 'Burger King', 230, 5, 1),
 (18, '2023-04-13', 'Tuition fee of Rohit', 1400, 3, 3),
 (20, '2023-04-13', 'Tuition fee of Reya', 1400, 3, 3),
 (22, '2023-04-13', 'Tuition Fee Reshmi', 500, 3, 3),
 (23, '2023-04-13', 'Doll for Reshmi', 200, 3, 3),
 (24, '2023-04-13', 'Electricity', 749, 6, 3),
 (25, '2023-04-13', 'Water Bill (Wasa-03/23)', 220, 6, 3),
-(26, '2023-04-13', 'Burger King', 389, 1, 2),
+(26, '2023-04-13', 'Burger King', 199, 1, 2),
 (29, '2023-04-13', 'Bike', 500, 2, 2),
-(30, '2023-04-14', 'Electricity', 1294, 4, 2),
-(31, '2023-04-14', 'Burger King', 449, 1, 2),
-(32, '2023-04-14', 'Local Fucka Stall', 70, 1, 2),
-(33, '2023-04-14', 'Bike', 1490, 2, 2);
+(30, '2023-04-14', 'Electricity', 732, 4, 2),
+(31, '2023-04-14', 'Burger King', 249, 1, 2),
+(32, '2023-04-14', 'Local Fucka Stall', 70, 1, 2);
 
 -- --------------------------------------------------------
 
