@@ -3,3 +3,9 @@
         width: 50% !important;
     }
 }
+
+@media (max-width: 459px) {
+    .mt-xs-1 {
+        margin-top: 0.5rem !important;
+    }
+}

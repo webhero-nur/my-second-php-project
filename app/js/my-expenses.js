@@ -211,7 +211,7 @@ function loadAllExpense() {
                 <td>
                     <button class="btn btn-info" title="Edit" data-bs-toggle="modal"
                     data-bs-target="#updateExpenseModal" onclick='bindDataToUpdate(${JSON.stringify(val)})'><i class="fa-regular fa-pen-to-square"></i></button>
-                    <button class="btn btn-danger" title="Delete" onclick="deleteExpense(${val.id})"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-danger mt-xs-1" title="Delete" onclick="deleteExpense(${val.id})"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>`;
 
