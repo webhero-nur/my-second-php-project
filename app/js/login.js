@@ -11,8 +11,6 @@ $("#login-form").on("submit", function (e) {
 
     let compositeString = btoa(username + ":" + password);
 
-    console.log(compositeString);
-
     $.ajax({
         url: "http://localhost/expence_recorder/api/controller/user_controller.php?op=login",
         type: "GET",
