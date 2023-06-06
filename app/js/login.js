@@ -1,3 +1,7 @@
+if (localStorage.getItem("userData")) {
+    location.href = "./my-expenses.html";
+}
+
 $("#login-form").on("submit", function (e) {
 
     e.preventDefault();
