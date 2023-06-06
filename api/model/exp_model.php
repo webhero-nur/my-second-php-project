@@ -12,6 +12,28 @@ class exp_model extends auth {
         $this->con = new mysqli($host, $user, $password, $db);
     }
 
+    public function add_expense_type(){
+
+        if($this->user_auth()){
+
+            $qry = "INSERT INTO exp_type(curdate, title, uid) VALUES(CURDATE(), '".$_GET['new_exp_type']."', ".$_GET['uid'].");";
+
+            $res = $this->con->query($qry);
+
+            if($res){
+                echo "Expense Type added";
+            }
+            else{
+                echo "Contact Developer in exp_model.php --> add_expense_type";
+            }
+
+        }
+        else{
+            echo 'Auth Failed in exp_model.php --> add_expense_type';
+        }
+
+    }
+
     public function add_expense(){
 
         if($this->user_auth()){
@@ -103,6 +125,7 @@ class exp_model extends auth {
 
         
         // if($this->user_auth()){
+        if(true){
         
             $qry = "SELECT title FROM exp_type WHERE id=".$exp_type_id.";";
 
@@ -122,10 +145,10 @@ class exp_model extends auth {
                 echo "Expense type id not valid";
     
             }
-        // }
-        // else{
-        //     echo 'Auth Failed in exp_model.php --> list_all_expenses';
-        // }
+        }
+        else{
+            echo 'Auth Failed in exp_model.php --> list_all_expenses';
+        }
     }
 
     public function delete_exp($exp_id=''){

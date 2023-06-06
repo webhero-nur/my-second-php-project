@@ -76,9 +76,40 @@ function updateExpense(e) {
 
 }
 
+function addNewExpenseType() {
+
+    const newExpType = prompt("Enter new expense type: ");
+
+    if (newExpType) {
+        $.ajax({
+
+            url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=add_expense_type&new_exp_type=" + newExpType + "&uid=" + userDataInLocalStorage[0].id,
+            type: "POST",
+            headers: {
+                "auth": "credentials " + localStorage.getItem("access-token")
+            },
+            success: function (res) {
+
+                console.log(res);
+
+                if (res === "Expense Type added") {
+                    Swal.fire(
+                        'Added',
+                        'Expense Type Added Successfully',
+                        'success'
+                    )
+                        .then(function (p) {
+                            location.reload();
+                        });
+                }
+            }
+        })
+    }
+
+}
+
 function addExpense(e) {
     e.preventDefault();
-    console.log($("#add-exp-form").serializeArray());
     $.ajax({
 
         url: "http://localhost/expence_recorder/api/controller/exp_controller.php?op=add_expense&uid=" + userDataInLocalStorage[0].id,
@@ -101,10 +132,6 @@ function addExpense(e) {
                         location.reload();
                     });
             }
-            else {
-                alert("Something Went Wrong!!!");
-            }
-
         }
     })
 
@@ -177,6 +204,10 @@ function loadAllExpenseType() {
                 options += option;
 
             });
+
+            const instruction = `<option class="text-info text-center" disabled>Add new expense type from above button</option>`;
+
+            options += instruction;
 
             $("#exp-types").html(options);
         }
