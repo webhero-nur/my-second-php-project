@@ -9,6 +9,7 @@ $("#signup-form").on("submit", function (e) {
     let dataToPost = {
         full_name: $("#full-name").val(),
         username: $("#username").val(),
+        recovery: $("#recovery").val(),
         password: $("#password").val()
     };
 
@@ -38,20 +39,18 @@ function checkUsername(potentialUsername) {
         type: "GET",
         success: function (res) {
             if (res === "username available") {
-                $("#username").removeClass("border-danger");
-                $("#username").addClass("border-success");
+                $("#username").removeClass("border-danger text-danger");
+                $("#username").addClass("border-success text-success");
                 $("#username-notice").removeClass("d-block");
                 $("#username-notice").addClass("d-none");
                 $("#submit-btn").removeAttr("disabled");
-                console.log('Available');
             }
             else {
-                $("#username").removeClass("border-success");
-                $("#username").addClass("border-danger");
+                $("#username").removeClass("border-success text-success");
+                $("#username").addClass("border-danger text-danger");
                 $("#username-notice").removeClass("d-none");
                 $("#username-notice").addClass("d-block");
                 $("#submit-btn").attr("disabled", true);
-                console.log('Not Available');
             }
         }
     });

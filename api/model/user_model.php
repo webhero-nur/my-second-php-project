@@ -27,7 +27,7 @@
 
         function add_user(){
 
-            $qry = "INSERT INTO users(full_name, username, password) VALUES('".$_POST['full_name']."','".$_POST['username']."','".$_POST['password']."')";
+            $qry = "INSERT INTO users(full_name, username, recovery, password) VALUES('".$_POST['full_name']."','".$_POST['username']."','".$_POST['recovery']."','".$_POST['password']."')";
             
             $result = $this->con->query($qry);
 
