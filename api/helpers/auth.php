@@ -14,7 +14,7 @@
             
             $con = new mysqli($host, $user, $password, $db);
 
-            $qry = "SELECT id, full_name FROM users WHERE username='".$credentials[0]."' AND password='".strrev($credentials[1])."';";
+            $qry = "SELECT id, full_name, recovery FROM users WHERE username='".$credentials[0]."' AND password='".strrev($credentials[1])."';";
 
             $res = $con->query($qry);
 
