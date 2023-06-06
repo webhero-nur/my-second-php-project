@@ -4,7 +4,7 @@ const userDataInLocalStorage = JSON.parse(localStorage.getItem("userData"));
 function windowOnLoad() {
 
     if (!localStorage.getItem("userData")) {
-        location.href = "http://localhost/expence_recorder/app/login.html";
+        location.href = "./login.html";
     }
 
     const userFullName = `
