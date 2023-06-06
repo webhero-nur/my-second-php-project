@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
+
+.modal-backdrop {
+    z-index: 0;
+}
+
 .mt-6 {
     margin-top: 4rem !important
 }
