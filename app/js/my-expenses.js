@@ -8,7 +8,7 @@ function windowOnLoad() {
     }
 
     const userFullName = `
-        <div class="fs-3 fw-bolder text-info" style="font-family: 'Tilt Prism', cursive;">${userDataInLocalStorage[0].full_name}</div>
+        <div class="h1 fw-bolder text-info" style="font-family: 'Tilt Prism', cursive;">${userDataInLocalStorage[0].full_name}</div>
     `;
 
     $("#user-full-name").html(userFullName);
@@ -195,6 +195,11 @@ function loadAllExpenseType() {
         },
         success: function (res) {
             let options = "";
+
+            if (res === "No data found") {
+                const instruction = `<option class="text-info text-center" disabled>Add new expense type from above button</option>`;
+                $("#exp-types").html(instruction);
+            }
 
             $.each(res, function (key, val) {
                 let option = "";
